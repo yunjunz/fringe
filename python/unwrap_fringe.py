@@ -3,6 +3,7 @@
 # Author: Heresh Fattahi
 
 import os
+import time
 import argparse
 from osgeo import gdal
 import isce
@@ -111,6 +112,8 @@ if __name__ == '__main__':
     '''
     Main driver.
     '''
+    start_time = time.time()
+
     #*************************************************************#
     # read the input options and unwrap
     inps = cmdLineParser()
@@ -126,4 +129,7 @@ if __name__ == '__main__':
 
     elif inps.method == "phass":
         unwrap_phass(inps, length, width)
+
+    m, s = divmod(time.time()-start_time, 60)
+    print('time used: {:02.0f} mins {:02.1f} secs.\n'.format(m, s))
 
